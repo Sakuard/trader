@@ -9,22 +9,27 @@ require('dotenv').config();
 
 const swagger = require('./swagger');
 const traderRoutes = require('./route/trader');
-const adapter = new FileSync('db.json');
-const db = low(adapter);
+const adapter = new FileSync('./db/ACCOUNTS.json');
+const ACCOUNTS = low(adapter);
+const accountDAdapter = new FileSync('./db/accountD.json');
+const accountD = low(accountDAdapter);
 
-db.defaults({ ACCOUNT: [{ ACCOUNT: 'SAKUARD', PWD: 'pwd@111111'}]})
+ACCOUNTS.defaults({ ACCOUNTS: [ { ACCOUNT: 'SAKUARD', PWD: 'pwd@111111' } ] })
+accountD.defaults({ 123: [ { action: 'in', amoung: '2000' } ] })
 
 const config = process.env;
 
 const app = express();
 const server = http.createServer(app);
+app.use(cors());
+app.use(express.json());
+app.ACCOUNTS = ACCOUNTS;
+app.accountD = accountD;
 
 app.get('/', (req, res) => { res.send('Hello world') })
 app.use('/trader', traderRoutes);
 
 swagger(app);
-app.use(cors());
-app.db = db;
 
 server.listen(config.PORT, () => {
   const ifaces = os.networkInterfaces();
