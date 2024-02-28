@@ -203,7 +203,8 @@ router.post('/user/login', (req, res) => {
   console.log(`result: `, result);
   let response = {}
   if (result) {
-    const token = jwt.sign(result, process.env.JWT_KEY, {expiresIn: '60s'})
+    const token = jwt.sign(result, process.env.JWT_KEY, {expiresIn: '60s'});
+
     console.log(`token: `, token);
     response = {
       RETCODE: 'OK',
@@ -281,7 +282,7 @@ router.put('/account/action', (req, res) => {
  *        description: Unauthorized, missing or invalid JWT
  */
 router.get('/protected', jwtAuth, (req, res) => {
-  console.log(`exec /protected`)
+  console.log(`exec /protected: `, req)
   res.send({ RETCODE: 'OK', MSG: 'Success!' });
 })
 

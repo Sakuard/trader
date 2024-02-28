@@ -27,19 +27,6 @@ app.use(express.json());
 app.accountM = accountM;
 app.accountD = accountD;
 
-// function jwtAuth(req, res, next) {
-//   console.log(`exec jwtAuth() ...`)
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
-//   if (token == null) return res.sendStatus(401);
-
-//   jwt.verify(token, config.JWT_KEY, (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   })
-// }
-
 app.get('/', (req, res) => { res.send('Hello world') })
 app.use('/trader', traderRoutes);
 
@@ -54,7 +41,7 @@ server.listen(config.PORT, () => {
         // 跳過內部（i.e., 127.0.0.1）和非ipv4地址
         return;
       }
-      console.log(`Server running on http://${iface.address}:${config.PORT}`);
+      console.log(`Server running on https://${iface.address}:${config.PORT}`);
     });
   });
 });

@@ -11,7 +11,7 @@ const options = {
       description: 'RESTFul APIs Document',
     },
     servers: [
-      {url: 'http://localhost:7777', description: 'Trader server'},
+      {url: 'https://localhost:7777', description: 'Trader server'},
     ],
   },
   apis: [`./*.js`,'./route/*.js']
