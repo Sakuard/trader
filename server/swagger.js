@@ -1,6 +1,8 @@
 console.log(`import swagger.js`);
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
+require('dotenv').config();
+const config = process.env;
 
 const options = {
   swaggerDefinition: {
@@ -11,7 +13,7 @@ const options = {
       description: 'RESTFul APIs Document',
     },
     servers: [
-      {url: 'http://localhost:7777', description: 'Trader server'},
+      {url: `https://${config.HOST}:${config.PORT}`, description: 'Trader server'},
     ],
   },
   apis: [`./*.js`,'./route/*.js']
